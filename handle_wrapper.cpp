@@ -35,12 +35,11 @@ void THandleWrapper::AddQuitCmd()
 
 void THandleWrapper::makeJob()
 {  
-  std::mutex locMtx;
   while (true)
   {
     if (!qCmds.empty())
     {
-      std::unique_lock<std::mutex> Lock(locMtx);
+      std::unique_lock<std::mutex> Lock(Mtx);
       TQEl In = qCmds.front();
       qCmds.pop();
       Lock.unlock();
